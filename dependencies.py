@@ -1,3 +1,4 @@
+from fastapi import Depends
 from sqlalchemy.orm import Session
 
 from database import SessionLocal
@@ -11,5 +12,8 @@ def get_db() -> Session:
         db.close()
 
 
-async def common_parameters(skip: int = 0, limit: int = 100):
-    return {"skip": skip, "limit": limit}
+async def common_parameters(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
+    return {"skip": skip, "limit": limit, "db": db}
+
+
+
