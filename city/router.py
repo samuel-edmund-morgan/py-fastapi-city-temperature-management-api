@@ -9,7 +9,6 @@ from dependencies import get_db
 router = APIRouter()
 
 
-
 @router.post("/cities", response_model=City, tags=["City CRUD"])
 async def create_city(city: CityCreate, db: Session = Depends(get_db)):
     db_city = get_city_by_name(db, city.name)
